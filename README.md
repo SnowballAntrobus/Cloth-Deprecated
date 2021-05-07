@@ -1,3 +1,3 @@
-# MERN-for-Production
+# Cloth
 
-A template of sorts I made as a starting point for my MERN app projects. It's set up for Docker, MongoDB Atlas, and Digital Ocean. It also now includes authetication support using Firebase auth! The styling (currently minimal) is handled with tailwindcss. The state is handled with MobX.
+Cloth is a MERN app focused on the categorization and reccomendation of fashion. It is hosted on MongoDB Atlas and Digital Ocean. You can find it [here](cloth.gay).
