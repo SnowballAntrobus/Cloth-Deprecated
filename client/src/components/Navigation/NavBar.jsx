@@ -9,11 +9,11 @@ import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
 
 const NavBar = ({ sessionStore }) =>
-sessionStore.authUser ? (
-  <NavigationAuth authUser={sessionStore.authUser} />
-) : (
-  <NavigationNonAuth />
-);
+  sessionStore.authUser ? (
+    <NavigationAuth authUser={sessionStore.authUser} />
+  ) : (
+    <NavigationNonAuth />
+  );
 
 const NavigationNonAuth = () => (
   <ul>
