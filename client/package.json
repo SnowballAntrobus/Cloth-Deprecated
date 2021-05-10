@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@headlessui/react": "^1.1.1",
+    "@heroicons/react": "^1.0.1",
     "autoprefixer": "^9",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
