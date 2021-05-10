@@ -4,11 +4,11 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
+    "@headlessui/react": "^1.1.1",
     "autoprefixer": "^9",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "firebase": "^8.4.2",
-    "headlessui": "^0.0.0",
     "heroicons": "^1.0.1",
     "mobx": "^6.3.0",
     "mobx-react": "^7.1.0",
