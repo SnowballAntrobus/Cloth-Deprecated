@@ -30,8 +30,18 @@ export const ItemsInsert = (props) => {
   };
 
   const handleIncludeItem = async () => {
+    const type = fileInput.current.files[0].type.split("/")[1];
+    console.log(type);
+    if (type !== "png" && type !== "jpg") {
+      window.alert(`Image is not a png or jpg`);
+      return
+    }
+    if (fileInput.current.files[0].size > 1000000) {
+      window.alert(`Image file is larger than 500kb`);
+      return
+    }
     const _id = randomBytes(20).toString('hex');
-    const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/${_id}`;
+    const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}${type}`;
     const description = "test"
     const w2c = [];
 
@@ -52,11 +62,11 @@ export const ItemsInsert = (props) => {
     let newFileName = id;
 
     const config_S3 = {
-      bucketName: process.env.REACT_APP_BUCKET_NAME,
-      dirName: process.env.REACT_APP_DIR_NAME,
-      region: process.env.REACT_APP_REGION,
-      accessKeyId: process.env.REACT_APP_ACCESS_ID,
-      secretAccessKey: process.env.REACT_APP_ACCESS_KEY,
+      bucketName: process.env.REACT_APP_AMAZON_S3_BUCKET_NAME,
+      dirName: process.env.REACT_APP_AMAZON_S3_DIR_NAME,
+      region: process.env.REACT_APP_AMAZON_S3_REGION,
+      accessKeyId: process.env.REACT_APP_AMAZON_S3_ACCESS_ID,
+      secretAccessKey: process.env.REACT_APP_AMAZON_S3_ACCESS_KEY,
     };
 
     const ReactS3Client = new S3(config_S3);
