@@ -40,7 +40,6 @@ class ItemsGrid extends Component {
 
     return (
       <div>
-        <h1>Grid</h1>
         <div className="grid grid-cols-1 md:grid-cols-2">{listItems}</div>
       </div>
     );

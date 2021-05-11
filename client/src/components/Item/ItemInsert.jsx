@@ -12,7 +12,7 @@ export const ItemsInsert = (props) => {
   const [type, setType] = useState("");
   const [brand, setBrand] = useState("");
   const [season, setSeason] = useState("");
-  const [w2c, setW2C] = useState([]);
+  const [w2c, setW2C] = useState(["pork"]);
   const fileInput = useRef();
 
   const handleChangeInputType = async (event) => {
@@ -32,7 +32,7 @@ export const ItemsInsert = (props) => {
 
   const handleIncludeItem = async () => {
     const filetype = fileInput.current.files[0].type.split("/")[1];
-    if (filetype !== "png" && filetype !== "jpg") {
+    if (filetype !== "png" && filetype !== "jpeg") {
       window.alert(`Image is not a png or jpg`);
       return
     }
@@ -80,7 +80,7 @@ export const ItemsInsert = (props) => {
           <div className="px-4 sm:px-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">Create Item</h3>
             <p className="mt-1 text-sm text-gray-600">
-              Thanks for contributing! Try to provide the most accurate info possible.
+              Thanks for contributing! Fill all the fields.
             </p>
           </div>
         </div>
@@ -128,7 +128,7 @@ export const ItemsInsert = (props) => {
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <input type="text"
-                          value={type}
+                          value={brand}
                           onChange={handleChangeInputBrand}
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                           placeholder="gucci, needles, kapital"
@@ -146,7 +146,7 @@ export const ItemsInsert = (props) => {
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <input type="text"
-                          value={type}
+                          value={season}
                           onChange={handleChangeInputSeason}
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                           placeholder="fall 2020, winter 1999, spring 2016"
