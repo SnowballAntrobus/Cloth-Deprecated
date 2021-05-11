@@ -5,7 +5,6 @@ const Item = new Schema(
   {
     _id: { type: String, required: true },
     imageURL: { type: String, required: true },
-    description: { type: String, required: true },
     type: { type: String, required: true },
     brand: { type: String, required: true },
     season: { type: String, required: true },

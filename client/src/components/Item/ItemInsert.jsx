@@ -30,9 +30,9 @@ export const ItemsInsert = (props) => {
   };
 
   const handleIncludeItem = async () => {
-    const type = fileInput.current.files[0].type.split("/")[1];
+    const filetype = fileInput.current.files[0].type.split("/")[1];
     console.log(type);
-    if (type !== "png" && type !== "jpg") {
+    if (filetype !== "png" && filetype !== "jpg") {
       window.alert(`Image is not a png or jpg`);
       return
     }
@@ -41,11 +41,10 @@ export const ItemsInsert = (props) => {
       return
     }
     const _id = randomBytes(20).toString('hex');
-    const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}${type}`;
-    const description = "test"
+    const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}${filetype}`;
     const w2c = [];
 
-    const payload = { _id, imageURL, description, type, brand, season, w2c };
+    const payload = { _id, imageURL, type, brand, season, w2c };
 
     setType("");
     setBrand("");

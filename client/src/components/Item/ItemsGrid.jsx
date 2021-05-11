@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Image } from "react";
 import { itemApi } from "../../api";
 
 class LinkItem extends Component {
@@ -9,7 +9,7 @@ class LinkItem extends Component {
   };
 
   render() {
-    return <div onClick={this.itemLink}>ItemIMAGELink</div>;
+    return <div onClick={this.itemLink}>Item</div>;
   }
 }
 
@@ -33,7 +33,7 @@ class ItemsGrid extends Component {
     const { items } = this.state;
 
     const listItems = items.map((item) => (
-      <LinkItem id={item._id} key={item._id} />
+      <LinkItem id={item._id} key={item._id}/>
     ));
 
     console.log("TCL: ItemsGrid -> render -> items", items);
