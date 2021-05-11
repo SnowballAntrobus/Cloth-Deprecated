@@ -12,7 +12,6 @@ export const ItemsInsert = (props) => {
   const [type, setType] = useState("");
   const [brand, setBrand] = useState("");
   const [season, setSeason] = useState("");
-  const [w2c, setW2C] = useState(["pork"]);
   const fileInput = useRef();
 
   const handleChangeInputType = async (event) => {
@@ -30,18 +29,30 @@ export const ItemsInsert = (props) => {
     setSeason(season.toLowerCase());
   };
 
-  const handleIncludeItem = async () => {
+  const handleIncludeItem = async (event) => {
+
+    if(!(type && brand && season)) {
+      event.preventDefault();
+      window.alert(`Missing fields`);
+      return
+    }
+
     const filetype = fileInput.current.files[0].type.split("/")[1];
     if (filetype !== "png" && filetype !== "jpeg") {
+      event.preventDefault();
       window.alert(`Image is not a png or jpg`);
       return
     }
     if (fileInput.current.files[0].size > 1000000) {
+      event.preventDefault();
       window.alert(`Image file is larger than 500kb`);
       return
     }
+
     const _id = randomBytes(20).toString('hex');
     const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}.${filetype}`;
+
+    const w2c =[]
 
     const payload = { _id, imageURL, type, brand, season, w2c };
 
