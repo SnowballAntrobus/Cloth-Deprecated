@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Image } from "react";
 import { inject, observer } from 'mobx-react';
 import { compose } from "recompose";
 
@@ -40,9 +40,11 @@ class ItemPage extends Component {
 
     this.state = {
       id: this.props.match.params.id,
+      imageURL: "",
       type: "",
       brand: "",
       season: "",
+      w2c: [],
     };
   }
 
@@ -51,21 +53,24 @@ class ItemPage extends Component {
     const item = await itemApi.getItemById(id);
 
     this.setState({
+      imageURL: item.data.data.imageURL,
       type: item.data.data.type,
       brand: item.data.data.brand,
       season: item.data.data.season,
+      w2c: item.data.data.w2c,
     });
   };
 
   render() {
-    const { id, type, brand, season } = this.state;
-    const item = { _id: id, type: type, brand: brand, season: season };
+    const { id, imageURL, type, brand, season, w2c } = this.state;
+    const item = { _id: id, imageURL: imageURL, type: type, brand: brand, season: season, w2c: w2c };
     return (
       <div>
         <h1>Item Page</h1>
         <AddItemToWishlist item={item} authUser={this.props.sessionStore.authUser} />
         <div>
           <ul>
+            <li><Image src={imageURL}/></li>
             <li>Type: {type}</li>
             <li>Brand: {brand}</li>
             <li>Season: {season}</li>
