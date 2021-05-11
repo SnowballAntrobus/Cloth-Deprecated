@@ -17,17 +17,17 @@ export const ItemsInsert = (props) => {
 
   const handleChangeInputType = async (event) => {
     const type = event.target.value;
-    setType(type);
+    setType(type.toLowerCase());
   };
 
   const handleChangeInputBrand = async (event) => {
     const brand = event.target.value;
-    setBrand(brand);
+    setBrand(brand.toLowerCase());
   };
 
   const handleChangeInputSeason = async (event) => {
     const season = event.target.value;
-    setSeason(season);
+    setSeason(season.toLowerCase());
   };
 
   const handleIncludeItem = async () => {
@@ -75,33 +75,96 @@ export const ItemsInsert = (props) => {
 
   return (
     <div>
-      <h1>Create Item</h1>
+      <div className="md:grid md:grid-cols-3 md:gap-6">
+        <div className="md:col-span-1">
+          <div className="px-4 sm:px-0">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Create Item</h3>
+            <p className="mt-1 text-sm text-gray-600">
+              Thanks for contributing! Try to provide the most accurate info possible.
+            </p>
+          </div>
+        </div>
+        <div className="mt-5 md:mt-0 md:col-span-2">
+          <form>
+            <div className="shadow sm:rounded-md sm:overflow-hidden">
+              <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
 
-      <label>Image:</label>
-      <input type="file" ref={fileInput}/>
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Image
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input type="file" ref={fileInput} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      <label>Type: </label>
-      <input type="text"
-        value={type}
-        onChange={handleChangeInputType}
-      />
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Type
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input type="text"
+                          value={type}
+                          onChange={handleChangeInputType}
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          placeholder="pants, shirt, shoes"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      <label>Brand: </label>
-      <input
-        type="text"
-        value={brand}
-        onChange={handleChangeInputBrand}
-      />
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Brand
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input type="text"
+                          value={type}
+                          onChange={handleChangeInputBrand}
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          placeholder="gucci, needles, kapital"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      <label>Season: </label>
-      <input
-        type="text"
-        value={season}
-        onChange={handleChangeInputSeason}
-      />
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Season
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input type="text"
+                          value={type}
+                          onChange={handleChangeInputSeason}
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          placeholder="fall 2020, winter 1999, spring 2016"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-      <button onClick={handleIncludeItem}>Add Item</button>
-      <a href={"/items/list"}>Cancel</a>
+              </div>
+              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleIncludeItem}>Add Item</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
