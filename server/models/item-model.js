@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const Item = new Schema(
   {
+    _id: { type: String, required: true },
     imageURL: { type: String, required: true },
     description: { type: String, required: true },
     type: { type: String, required: true },
