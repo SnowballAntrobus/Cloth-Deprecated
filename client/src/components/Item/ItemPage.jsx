@@ -1,4 +1,4 @@
-import React, { Component, Image } from "react";
+import React, { Component } from "react";
 import { inject, observer } from 'mobx-react';
 import { compose } from "recompose";
 
@@ -70,7 +70,7 @@ class ItemPage extends Component {
         <AddItemToWishlist item={item} authUser={this.props.sessionStore.authUser} />
         <div>
           <ul>
-            <li><Image src={imageURL}/></li>
+            <li><img src={imageURL} alt="product"/></li>
             <li>Type: {type}</li>
             <li>Brand: {brand}</li>
             <li>Season: {season}</li>
