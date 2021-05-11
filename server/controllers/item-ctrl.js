@@ -50,9 +50,11 @@ updateItem = async (req, res) => {
         message: "Item not found!",
       });
     }
+    item.imageURL = body.imageURL;
     item.type = body.type;
     item.brand = body.brand;
     item.season = body.season;
+    item.w2c = body.w2c;
     item
       .save()
       .then(() => {
