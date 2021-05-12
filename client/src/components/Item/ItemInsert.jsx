@@ -8,10 +8,13 @@ import { withAuthorization } from "../Session";
 
 import { itemApi } from "../../api";
 
+import w2cUpdate from "./w2cUpdate"
+
 export const ItemsInsert = (props) => {
   const [type, setType] = useState("");
   const [brand, setBrand] = useState("");
   const [season, setSeason] = useState("");
+  const [w2c, setW2c] = useState([]);
   const fileInput = useRef();
 
   const handleChangeInputType = async (event) => {
@@ -51,8 +54,6 @@ export const ItemsInsert = (props) => {
 
     const _id = randomBytes(20).toString('hex');
     const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}.${filetype}`;
-
-    const w2c =[]
 
     const payload = { _id, imageURL, type, brand, season, w2c };
 
@@ -162,6 +163,19 @@ export const ItemsInsert = (props) => {
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                           placeholder="fall 2020, winter 1999, spring 2016"
                         />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        W2C
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <w2cUpdate w2c={w2c} setW2c={setW2c}/>
                       </div>
                     </div>
                   </div>
