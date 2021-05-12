@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-class w2cUpdate extends Component {
+class listUpdate extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             newItem: "",
-            w2c: this.props.match.params.w2c,
+            list: this.props.match.params.list,
         };
     }
 
@@ -15,27 +15,27 @@ class w2cUpdate extends Component {
         this.setState({ newItem });
     };
 
-    addW2c = async () => {
-        const w2c = this.state.w2c.push(this.state.newItem);
-        this.props.setW2c(w2c);
-        this.setState({ w2c: w2c, newItem: "" });
+    addToList = async () => {
+        const list = this.state.list.push(this.state.newItem);
+        this.props.setList(list);
+        this.setState({ list: list, newItem: "" });
     }
 
-    removeW2c = async (itemToRemove) => {
-        const w2c = this.state.w2c.filter(
+    removeFromList = async (itemToRemove) => {
+        const list = this.state.list.filter(
             (item) => item !== itemToRemove
         )
-        this.props.setW2c(w2c);
-        this.setState({ w2c });
+        this.props.setList(list);
+        this.setState({ list });
     }
  
     render() {
-        const { newItem, w2c } = this.state;
+        const { newItem, list } = this.state;
 
-        const listItems = w2c.map((item) => (
+        const listItems = list.map((item) => (
             <div>
                 <div>Link: {item}</div>
-                <button onClick={this.removeW2c(item)}>Remove</button>
+                <button onClick={this.removeFromList(item)}>Remove</button>
             </div>
         ));
 
@@ -46,10 +46,10 @@ class w2cUpdate extends Component {
                     value={newItem}
                     onChange={this.handleChangeInputNewItem}
                 />
-                <button onClick={this.addW2c}>Add</button>
+                <button onClick={this.addToList}>Add</button>
             </div>
         );
     }
 }
 
-export default w2cUpdate;
+export default listUpdate;

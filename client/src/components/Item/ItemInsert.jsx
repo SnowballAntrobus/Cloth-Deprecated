@@ -8,7 +8,7 @@ import { withAuthorization } from "../Session";
 
 import { itemApi } from "../../api";
 
-import w2cUpdate from "./w2cUpdate"
+import listUpdate from "./listUpdate"
 
 export const ItemsInsert = (props) => {
   const [type, setType] = useState("");
@@ -175,7 +175,7 @@ export const ItemsInsert = (props) => {
                         W2C
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
-                        <w2cUpdate w2c={w2c} setW2c={setW2c}/>
+                        <listUpdate list={w2c} setList={setW2c}/>
                       </div>
                     </div>
                   </div>
