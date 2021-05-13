@@ -6,7 +6,7 @@ import { withFirebase } from "../Firebase";
 
 import * as ROUTES from "../../constants/routes";
 
-import { wishlistApi } from "../../api";
+import { wishlistApi, closetApi, userApi } from "../../api";
 
 const SignUpPage = () => (
   <div>
@@ -34,10 +34,15 @@ class SignUpFormBase extends Component {
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
+      .then(async (authUser) => {
         const _id = authUser.user.uid;
         const payload = { _id };
-        wishlistApi.createWishlist(payload);
+        const wishlist = await wishlistApi.createWishlist(payload);
+        const closet = await closetApi.createWishlist(payload);
+        const admin = false;
+        const payloadUser = { _id, username, admin, wishlist, closet }
+        userApi.createUser(payloadUser);
+
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
