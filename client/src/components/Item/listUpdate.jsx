@@ -1,22 +1,32 @@
 import React, { Component } from "react";
 
-class listUpdate extends Component {
+class ListUpdate extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             newItem: "",
-            list: this.props.match.params.list,
+            list: [],
         };
     }
+
+    componentDidMount = () => {
+        const list = this.props.list;
+
+        this.setState({
+            list: list
+        });
+    };
 
     handleChangeInputNewItem = async (event) => {
         const newItem = event.target.value.toLowerCase();
         this.setState({ newItem });
     };
 
-    addToList = async () => {
-        const list = this.state.list.push(this.state.newItem);
+    addToList = async (event) => {
+        event.preventDefault();
+        const newlist = [this.state.newItem]
+        const list = this.state.list.concat(newlist);
         this.props.setList(list);
         this.setState({ list: list, newItem: "" });
     }
@@ -28,7 +38,7 @@ class listUpdate extends Component {
         this.props.setList(list);
         this.setState({ list });
     }
- 
+
     render() {
         const { newItem, list } = this.state;
 
@@ -52,4 +62,4 @@ class listUpdate extends Component {
     }
 }
 
-export default listUpdate;
+export { ListUpdate };
