@@ -64,7 +64,7 @@ updateWishlist = async (req, res) => {
     if (err) {
       return res.status(404).json({
         err,
-        message: "Item not found!",
+        message: "Wishlist not found!",
       });
     }
     wishlist.items = body.items;

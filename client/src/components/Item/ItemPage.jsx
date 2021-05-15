@@ -21,8 +21,9 @@ class AddItemToWishlist extends Component {
         const newItems = [...wishlist.data.data.items];
         newItems.push(this.props.item);
         const payload = { items: newItems };
-        wishlistApi.updateWishlistById(this.props.authUser, id, payload);
-        window.alert("Item added to your wishlist!");
+        wishlistApi.updateWishlistById(this.props.authUser, id, payload).then(() => {
+          window.alert("Item added to your wishlist!");
+        });
       } else {
         window.alert("Item is already in your wishlist");
       }
@@ -70,7 +71,7 @@ class ItemPage extends Component {
         <AddItemToWishlist item={item} authUser={this.props.sessionStore.authUser} />
         <div>
           <ul>
-            <li><img src={imageURL} alt="product"/></li>
+            <li><img src={imageURL} alt="product" /></li>
             <li>Type: {type}</li>
             <li>Brand: {brand}</li>
             <li>Season: {season}</li>
