@@ -37,11 +37,11 @@ class SignUpFormBase extends Component {
       .then(async (authUser) => {
         const _id = authUser.user.uid;
         const payload = { _id };
-        const wishlist = await wishlistApi.createWishlist(payload);
-        const closet = await closetApi.createWishlist(payload);
+        const wishlist = await wishlistApi.createWishlist(authUser, _id, payload);
+        const closet = await closetApi.createCloset(authUser, _id, payload);
         const admin = false;
         const payloadUser = { _id, username, admin, wishlist, closet }
-        userApi.createUser(payloadUser);
+        userApi.createUser(authUser, _id, payloadUser);
 
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
@@ -69,7 +69,7 @@ class SignUpFormBase extends Component {
           value={username}
           onChange={this.onChange}
           type="text"
-          placeholder="Full Name"
+          placeholder="Username"
         />
         <input
           name="email"

@@ -6,7 +6,7 @@ const UserCtrl = require("../controllers/user-ctrl");
 
 const router = express.Router();
 
-router.post("/user", UserCtrl.createUser);
+router.post("/user/:id", auth.checkIfAuthenticatedId, UserCtrl.createUser);
 router.put("/user/:id", auth.checkIfAdmin, UserCtrl.updateUser);
 router.delete("/user/:id", auth.checkIfAdmin, UserCtrl.deleteUser);
 router.get("/user/:id", UserCtrl.getUserById);

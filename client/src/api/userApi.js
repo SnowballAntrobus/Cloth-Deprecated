@@ -6,9 +6,9 @@ const api = axios.create({
   baseURL,
 });
 
-export const createUser = async (authUser, payload) => {
+export const createUser = async (authUser, id, payload) => {
   const token = await authUser.getIdToken();
-  return api.post("/user", payload, {
+  return api.post(`/user/${id}`, payload, {
     headers: { authorization: `Bearer ${token}` },
   });
 };

@@ -6,7 +6,12 @@ const api = axios.create({
   baseURL,
 });
 
-export const createCloset = (payload) => api.post("/closet", payload);
+export const createCloset = async (authUser, id, payload) => {
+  const token = await authUser.getIdToken();
+  return api.post(`/closet/${id}`, payload, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+};
 export const getClosetById = (id) => api.get(`/closet/${id}`);
 export const updateClosetById = async (authUser, id, payload) => {
   const token = await authUser.getIdToken();

@@ -6,7 +6,12 @@ const api = axios.create({
   baseURL,
 });
 
-export const createWishlist = (payload) => api.post("/wishlist", payload);
+export const createWishlist = async (authUser, id, payload) => {
+  const token = await authUser.getIdToken();
+  return api.post(`/wishlist/${id}`, payload, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+};
 export const getWishlistById = (id) => api.get(`/wishlist/${id}`);
 export const updateWishlistById = async (authUser, id, payload) => {
   const token = await authUser.getIdToken();
