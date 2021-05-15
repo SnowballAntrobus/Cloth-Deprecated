@@ -9,7 +9,7 @@ import * as ROUTES from "../../constants/routes";
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon, UserIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon, UserCircleIcon } from '@heroicons/react/outline'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -23,9 +23,9 @@ const NavBar = ({ sessionStore }) =>
   );
 
 const navigationNonAuth = [
-  { name: 'Landing', href: ROUTES.LANDING },
   { name: 'Items', href: ROUTES.ITEMS_GRID },
   { name: 'Sign In', href: ROUTES.SIGN_IN },
+  { name: 'Sign Up', href: ROUTES.SIGN_UP },
 ]
 
 const NavigationNonAuth = () => (
@@ -148,9 +148,9 @@ class NavigationAuth extends Component {
                     {({ open }) => (
                       <>
                         <div>
-                          <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                          <Menu.Button className="bg-gray-800 flex text-sm rounded-full">
                             <span className="sr-only">Open user menu</span>
-                            <UserIcon className="h-8 w-8 rounded-full" aria-hidden="true" />
+                            <UserCircleIcon className="bg-red-50 h-8 w-8 rounded-full" aria-hidden="true" />
                           </Menu.Button>
                         </div>
                         <Transition

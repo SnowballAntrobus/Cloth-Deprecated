@@ -64,7 +64,7 @@ updateCloset = async (req, res) => {
     if (err) {
       return res.status(404).json({
         err,
-        message: "Item not found!",
+        message: "Closet not found!",
       });
     }
     closet.items = body.items;

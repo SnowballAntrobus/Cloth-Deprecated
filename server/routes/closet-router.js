@@ -6,7 +6,7 @@ const ClosetCtrl = require("../controllers/closet-ctrl");
 
 const router = express.Router();
 
-router.post("/closet/id", auth.checkIfAuthenticatedId, ClosetCtrl.createCloset);
+router.post("/closet/:id", auth.checkIfAuthenticatedId, ClosetCtrl.createCloset);
 router.get("/closet/:id", ClosetCtrl.getClosetById);
 router.put("/closet/:id", auth.checkIfAuthenticatedId, ClosetCtrl.updateCloset);
 
