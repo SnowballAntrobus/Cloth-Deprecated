@@ -83,7 +83,6 @@ class PasswordForgetFormBase extends Component {
           {error && <p>{error.message}</p>}
         </div>
       </div>
-
     );
   }
 }

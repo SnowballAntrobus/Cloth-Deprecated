@@ -6,6 +6,7 @@ import LandingPage from "../components/Landing";
 import SignUpPage from "../components/SignUp";
 import SignInPage from "../components/SignIn";
 import PasswordForgetPage from "../components/PasswordForget";
+import PasswordChangePage from "../components/PasswordChange";
 import HomePage from "../components/Home";
 import AccountPage from "../components/Account";
 import {
@@ -28,6 +29,7 @@ const App = () => (
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+      <Route path={ROUTES.PASSWORD_CHANGE} component={PasswordChangePage} />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ITEMS_LIST} exact component={ItemsList} />
