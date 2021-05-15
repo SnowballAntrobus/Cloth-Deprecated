@@ -35,13 +35,12 @@ class SignUpFormBase extends Component {
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
+      .then(async (authUser) => {
         const _id = authUser.user.uid;
         const payload = { _id };
-        const wishlist = wishlistApi.createWishlist(authUser.user, _id, payload);
-        const closet = closetApi.createCloset(authUser.user, _id, payload);
-        const admin = false;
-        const payloadUser = { _id, username, admin, wishlist, closet }
+        await wishlistApi.createWishlist(authUser.user, _id, payload);
+        await closetApi.createCloset(authUser.user, _id, payload);
+        const payloadUser = { _id: _id, username: username, admin: false, wishlist: _id, closet: _id }
         userApi.createUser(authUser.user, _id, payloadUser);
 
         this.setState({ ...INITIAL_STATE });
