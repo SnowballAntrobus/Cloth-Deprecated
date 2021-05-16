@@ -40,7 +40,7 @@ class SignUpFormBase extends Component {
         const payload = { _id };
         await wishlistApi.createWishlist(authUser.user, _id, payload);
         await closetApi.createCloset(authUser.user, _id, payload);
-        const payloadUser = { _id: _id, username: username, admin: false, wishlist: _id, closet: _id }
+        const payloadUser = { _id: _id, username: username, admin: false}
         userApi.createUser(authUser.user, _id, payloadUser);
 
         this.setState({ ...INITIAL_STATE });
