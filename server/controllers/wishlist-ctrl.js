@@ -1,4 +1,5 @@
 const Wishlist = require("../models/wishlist-model");
+const mongoose = require('mongoose');
 
 createWishlist = (req, res) => {
   const body = req.body;
@@ -67,6 +68,7 @@ updateWishlist = async (req, res) => {
         message: "Wishlist not found!",
       });
     }
+    console.log(mongoose.Types.ObjectId.isValid(body.items[0]));
     wishlist.items = body.items;
     wishlist
       .save()

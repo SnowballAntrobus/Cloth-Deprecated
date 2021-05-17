@@ -5,21 +5,21 @@ import { compose } from "recompose";
 import { itemApi, wishlistApi } from "../../api";
 
 class AddItemToWishlist extends Component {
-  addToWishlist = (event) => {
+  addToWishlist = async (event) => {
     event.preventDefault();
     if (this.props.authUser === null) {
       window.alert("Sign in to use this feature!")
       return
     }
     const id = this.props.authUser.uid;
-    wishlistApi.getWishlistById(id).then((wishlist) => {
+    await wishlistApi.getWishlistById(id).then((wishlist) => {
       if (
         wishlist.data.data.items.filter(
           (item) => item._id === this.props.item._id
         ).length === 0
       ) {
         const newItems = [...wishlist.data.data.items];
-        newItems.push(this.props.item);
+        newItems.push(this.props.item._id);
         const payload = { _id: id, items: newItems };
         wishlistApi.updateWishlistById(this.props.authUser, id, payload).then(() => {
           window.alert("Item added to your wishlist!");

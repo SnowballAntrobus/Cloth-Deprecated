@@ -72,7 +72,7 @@ export const ItemsInsert = (props) => {
       return
     }
 
-    const _id = randomBytes(20).toString('hex');
+    const _id = randomBytes(12).toString('hex');
     const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}.${filetype}`;
 
     const payload = { _id, imageURL, type, brand, season, w2c };
