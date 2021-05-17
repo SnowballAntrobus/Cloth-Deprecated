@@ -1,5 +1,22 @@
 import React, { Component } from "react";
 
+class ItemAdded extends Component {
+    removeItem = (event) => {
+        event.preventDefault();
+
+        this.props.removeFromParent(this.props.item);
+    }
+
+    render() {
+        return (
+            <div>
+                <div>Link: {this.props.item}</div>
+                <button onClick={this.removeItem}>Remove</button>
+            </div>
+        );
+    }
+}
+
 class ListUpdate extends Component {
     constructor(props) {
         super(props);
@@ -43,10 +60,7 @@ class ListUpdate extends Component {
         const { newItem, list } = this.state;
 
         const listItems = list.map((item) => (
-            <div>
-                <div>Link: {item}</div>
-                <button onClick={this.removeFromList(item)}>Remove</button>
-            </div>
+            <ItemAdded item={item} key={item} removeFromParent={this.removeFromList}/>
         ));
 
         return (

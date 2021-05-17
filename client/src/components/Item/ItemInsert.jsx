@@ -12,7 +12,7 @@ import { ListUpdate } from "./ListUpdate"
 
 export const ItemsInsert = (props) => {
   const [type, setType] = useState("");
-  const [brand, setBrand] = useState("");
+  const [brand, setBrand] = useState([]);
   const [season, setSeason] = useState("");
   const [w2c, setW2c] = useState([]);
   const fileInput = useRef();
@@ -20,11 +20,6 @@ export const ItemsInsert = (props) => {
   const handleChangeInputType = async (event) => {
     const type = event.target.value;
     setType(type.toLowerCase());
-  };
-
-  const handleChangeInputBrand = async (event) => {
-    const brand = event.target.value;
-    setBrand(brand.toLowerCase());
   };
 
   const handleChangeInputSeason = async (event) => {
@@ -37,6 +32,12 @@ export const ItemsInsert = (props) => {
     if(!(type && brand && season)) {
       event.preventDefault();
       window.alert(`Missing fields`);
+      return
+    }
+
+    if (fileInput.current.files[0] === undefined){
+      event.preventDefault();
+      window.alert(`Missing image file`);
       return
     }
 
@@ -58,8 +59,9 @@ export const ItemsInsert = (props) => {
     const payload = { _id, imageURL, type, brand, season, w2c };
 
     setType("");
-    setBrand("");
+    setBrand([]);
     setSeason("");
+    setW2c([]);
 
     await itemApi.insertItem(props.sessionStore.authUser, payload).then((res) => {
       uploadImage(_id);
@@ -92,7 +94,7 @@ export const ItemsInsert = (props) => {
           <div className="px-4 sm:px-0">
             <h3 className="text-lg font-medium leading-6 text-gray-900">Create Item</h3>
             <p className="mt-1 text-sm text-gray-600">
-              Thanks for contributing! Fill all the fields.
+              Thanks for contributing!
             </p>
           </div>
         </div>
@@ -139,12 +141,7 @@ export const ItemsInsert = (props) => {
                         Brand
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
-                        <input type="text"
-                          value={brand}
-                          onChange={handleChangeInputBrand}
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                          placeholder="gucci, needles, kapital"
-                        />
+                        <ListUpdate list={brand} setList={setBrand}/>
                       </div>
                     </div>
                   </div>
