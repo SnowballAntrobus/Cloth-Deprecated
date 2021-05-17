@@ -21,7 +21,7 @@ class AddItemToWishlist extends Component {
         const newItems = [...wishlist.data.data.items];
         newItems.push(this.props.item._id);
         const payload = { _id: id, items: newItems };
-        wishlistApi.updateWishlistById(this.props.authUser, id, payload).then(() => {
+        wishlistApi.updateWishlistById(this.props.sessionStore.authUser, id, payload).then(() => {
           window.alert("Item added to your wishlist!");
         });
       } else {

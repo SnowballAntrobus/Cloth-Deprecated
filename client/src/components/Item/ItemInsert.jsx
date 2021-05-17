@@ -82,7 +82,9 @@ export const ItemsInsert = (props) => {
     setSeason("");
     setW2c([]);
 
-    itemApi.insertItem(props.sessionStore.authUser, payload).then((res) => {
+    console.log(this.props.sessionStore.authUser)
+
+    itemApi.insertItem(this.props.sessionStore.authUser, payload).then((res) => {
       uploadImage(_id);
       window.alert(`Item added!`);
     });
