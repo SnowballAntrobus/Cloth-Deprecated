@@ -10,8 +10,8 @@ class ItemAdded extends Component {
     render() {
         return (
             <div>
-                <div>Link: {this.props.item}</div>
-                <button onClick={this.removeItem}>Remove</button>
+                <div>{this.props.item}</div>
+                <button className="font-medium text-red-600 hover:text-red-500" onClick={this.removeItem}>Remove</button>
             </div>
         );
     }
@@ -60,17 +60,20 @@ class ListUpdate extends Component {
         const { newItem, list } = this.state;
 
         const listItems = list.map((item) => (
-            <ItemAdded item={item} key={item} removeFromParent={this.removeFromList}/>
+            <ItemAdded item={item} key={item} removeFromParent={this.removeFromList} />
         ));
 
         return (
             <div>
                 <div className="grid grid-cols-1"> {listItems} </div>
-                <input type="text"
-                    value={newItem}
-                    onChange={this.handleChangeInputNewItem}
-                />
-                <button onClick={this.addToList}>Add</button>
+                <div className="shadow-sm">
+                    <input type="text"
+                        value={newItem}
+                        onChange={this.handleChangeInputNewItem}
+                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                    />
+                </div>
+                <button className="font-medium text-indigo-600 hover:text-indigo-500" onClick={this.addToList}>Add</button>
             </div>
         );
     }

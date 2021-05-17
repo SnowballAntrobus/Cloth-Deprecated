@@ -27,6 +27,24 @@ export const ItemsInsert = (props) => {
     setSeason(season.toLowerCase());
   };
 
+  const uploadImage = (id) => {
+    let file = fileInput.current.files[0];
+    let newFileName = id;
+
+    const config_S3 = {
+      bucketName: process.env.REACT_APP_AMAZON_S3_BUCKET_NAME,
+      dirName: process.env.REACT_APP_AMAZON_S3_DIR_NAME,
+      region: process.env.REACT_APP_AMAZON_S3_REGION,
+      accessKeyId: process.env.REACT_APP_AMAZON_S3_ACCESS_ID,
+      secretAccessKey: process.env.REACT_APP_AMAZON_S3_ACCESS_KEY,
+    };
+
+    const ReactS3Client = new S3(config_S3);
+    ReactS3Client.uploadFile(file, newFileName).then(data => {
+      console.log(data);
+    });
+  };
+
   const handleIncludeItem = async (event) => {
 
     if(!(type && brand && season)) {
@@ -63,27 +81,8 @@ export const ItemsInsert = (props) => {
     setSeason("");
     setW2c([]);
 
-    await itemApi.insertItem(props.sessionStore.authUser, payload).then((res) => {
+    itemApi.insertItem(props.sessionStore.authUser, payload).then((res) => {
       uploadImage(_id);
-      window.alert(`Item inserted successfully`);
-    });
-  };
-
-  const uploadImage = (id) => {
-    let file = fileInput.current.files[0];
-    let newFileName = id;
-
-    const config_S3 = {
-      bucketName: process.env.REACT_APP_AMAZON_S3_BUCKET_NAME,
-      dirName: process.env.REACT_APP_AMAZON_S3_DIR_NAME,
-      region: process.env.REACT_APP_AMAZON_S3_REGION,
-      accessKeyId: process.env.REACT_APP_AMAZON_S3_ACCESS_ID,
-      secretAccessKey: process.env.REACT_APP_AMAZON_S3_ACCESS_KEY,
-    };
-
-    const ReactS3Client = new S3(config_S3);
-    ReactS3Client.uploadFile(file, newFileName).then(data => {
-      console.log(data);
     });
   };
 
