@@ -27,25 +27,26 @@ export const ItemsInsert = (props) => {
     setSeason(season.toLowerCase());
   };
 
-  const uploadImage = (id) => {
-    let file = fileInput.current.files[0];
-    let newFileName = id;
-
-    const config_S3 = {
-      bucketName: process.env.REACT_APP_AMAZON_S3_BUCKET_NAME,
-      dirName: process.env.REACT_APP_AMAZON_S3_DIR_NAME,
-      region: process.env.REACT_APP_AMAZON_S3_REGION,
-      accessKeyId: process.env.REACT_APP_AMAZON_S3_ACCESS_ID,
-      secretAccessKey: process.env.REACT_APP_AMAZON_S3_ACCESS_KEY,
-    };
-
-    const ReactS3Client = new S3(config_S3);
-    ReactS3Client.uploadFile(file, newFileName).then(data => {
-      console.log(data);
-    });
-  };
-
   const handleIncludeItem = async (event) => {
+
+    event.preventDefault();
+
+    const uploadImage = (id) => {
+      let file = fileInput.current.files[0];
+      let newFileName = id;
+  
+      const config_S3 = {
+        bucketName: process.env.REACT_APP_AMAZON_S3_BUCKET_NAME,
+        dirName: process.env.REACT_APP_AMAZON_S3_DIR_NAME,
+        region: process.env.REACT_APP_AMAZON_S3_REGION,
+        accessKeyId: process.env.REACT_APP_AMAZON_S3_ACCESS_ID,
+        secretAccessKey: process.env.REACT_APP_AMAZON_S3_ACCESS_KEY,
+      };
+  
+      const ReactS3Client = new S3(config_S3);
+      ReactS3Client.uploadFile(file, newFileName).then(data => {
+      });
+    };
 
     if(!(type && brand && season)) {
       event.preventDefault();
@@ -83,6 +84,7 @@ export const ItemsInsert = (props) => {
 
     itemApi.insertItem(props.sessionStore.authUser, payload).then((res) => {
       uploadImage(_id);
+      window.alert(`Item added!`);
     });
   };
 
