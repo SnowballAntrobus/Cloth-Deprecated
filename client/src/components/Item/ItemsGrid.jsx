@@ -8,11 +8,9 @@ class LinkItem extends Component {
     window.location.href = `/item/${this.props.id}`;
   };
 
-  // <div onClick={this.itemLink}><img src={this.props.src} alt="product"/></div>
-
   render() {
     return (
-      <div class="w-52 h-52 m-5 rounded overflow-hidden shadow-lg" onClick={this.itemLink}>
+      <div className="w-52 h-52 m-5 rounded overflow-hidden shadow-lg" onClick={this.itemLink}>
         <img src={this.props.src} alt="product" />
       </div>
     )
@@ -46,7 +44,7 @@ class ItemsGrid extends Component {
 
     return (
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-4 justify-items-center"> {listItems} </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 justify-items-center"> {listItems} </div>
       </div>
     );
   }

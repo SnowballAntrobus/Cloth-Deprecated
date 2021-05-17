@@ -31,7 +31,7 @@ class AddItemToWishlist extends Component {
   };
 
   render() {
-    return <button onClick={this.addToWishlist}>Add to Wishlist</button>;
+    return <button className="font-medium text-indigo-600 hover:text-indigo-500" onClick={this.addToWishlist}>Add to Wishlist</button>;
   }
 }
 
@@ -43,7 +43,7 @@ class ItemPage extends Component {
       id: this.props.match.params.id,
       imageURL: "",
       type: "",
-      brand: "",
+      brand: [],
       season: "",
       w2c: [],
     };
@@ -65,17 +65,35 @@ class ItemPage extends Component {
   render() {
     const { id, imageURL, type, brand, season, w2c } = this.state;
     const item = { _id: id, imageURL: imageURL, type: type, brand: brand, season: season, w2c: w2c };
+
     return (
-      <div>
-        <h1>Item Page</h1>
-        <AddItemToWishlist item={item} authUser={this.props.sessionStore.authUser} />
-        <div>
-          <ul>
-            <li><img src={imageURL} alt="product" /></li>
-            <li>Type: {type}</li>
-            <li>Brand: {brand}</li>
-            <li>Season: {season}</li>
-          </ul>
+      <div className="m-10 flex justify-center">
+        <div className="">
+          <div className="w-80 rounded shadow-lg">
+            <img src={imageURL} alt="product" />
+          </div>
+          <div className="p-6">
+            <div className="flex-wrap">
+              <h1 className="flex-auto text-xl font-semibold">
+                Short Description
+              </h1>
+              <div className="text-xl font-semibold text-gray-500">
+                <AddItemToWishlist item={item} authUser={this.props.sessionStore.authUser} />
+              </div>
+              <div className="w-full text-sm font-medium text-gray-500 mt-2">
+                Brand: {brand}
+              </div>
+              <div className="w-full text-sm font-medium text-gray-500 mt-2">
+                Type: {type}
+              </div>
+              <div className="w-full text-sm font-medium text-gray-500 mt-2">
+                Season: {season}
+              </div>
+              <div className="w-full text-sm font-medium text-gray-500 mt-2">
+                W2C: {w2c}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
