@@ -17,6 +17,7 @@ import {
   ItemPage,
 } from "../components/Item";
 import { WishlistView, WishlistUpdate } from "../components/Wishlist";
+import { ClosetView, ClosetUpdate } from "../components/Closet";
 
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../components/Session";
@@ -26,19 +27,25 @@ const App = () => (
     <NavBar />
     <Switch>
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
+      <Route path={ROUTES.HOME} component={HomePage} />
+
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
       <Route path={ROUTES.PASSWORD_CHANGE} component={PasswordChangePage} />
-      <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+
       <Route path={ROUTES.ITEMS_LIST} exact component={ItemsList} />
       <Route path={ROUTES.ITEMS_GRID} exact component={ItemsGrid} />
       <Route path={ROUTES.ITEM_CREATE} exact component={ItemInsert} />
       <Route path={ROUTES.ITEM_UPDATE} exact component={ItemUpdate} />
       <Route path={ROUTES.ITEM_PAGE} exact component={ItemPage} />
+
       <Route path={ROUTES.WISHLIST_PAGE} exact component={WishlistView} />
       <Route path={ROUTES.WISHLIST_UPDATE} exact component={WishlistUpdate} />
+
+      <Route path={ROUTES.CLOSET_PAGE} exact component={ClosetView} />
+      <Route path={ROUTES.CLOSET_UPDATE} exact component={ClosetUpdate} />
     </Switch>
   </Router>
 );

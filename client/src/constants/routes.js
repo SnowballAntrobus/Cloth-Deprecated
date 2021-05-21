@@ -15,3 +15,6 @@ export const ITEMS_GRID = "/items/grid";
 
 export const WISHLIST_PAGE = "/wishlists/:id";
 export const WISHLIST_UPDATE = "/mywishlist/:id";
+
+export const CLOSET_PAGE = "/closets/:id";
+export const CLOSET_UPDATE = "/mycloset/:id";
