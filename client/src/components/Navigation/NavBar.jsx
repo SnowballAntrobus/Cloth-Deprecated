@@ -100,6 +100,7 @@ class NavigationAuth extends Component {
         { name: 'Items', href: ROUTES.ITEMS_GRID },
         { name: 'Add Item', href: ROUTES.ITEM_CREATE },
         { name: 'Wishlist', href: `/mywishlist/${this.props.authUser.uid}` },
+        { name: 'Closet', href: `/mycloset/${this.props.authUser.uid}` },
       ]
     };
   }
