@@ -5,8 +5,15 @@ const User = new Schema(
   {
     _id: { type: String, required: true },
     username: { type: String, required: true },
-    points: { type: Number, required: false },
     admin: { type: Boolean, required: true },
+
+    height: { type: Number, required: true },
+    weight: { type: Number, required: true },
+
+    location: { type: String, required: false },
+    style: [{ type: String, required: false }],
+    
+    points: { type: Number, required: false },
   },
   { timestamps: true }
 );

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Closet = new Schema(
   {
     _id: { type: String, required: true },
-    items: [{ type: Schema.Types.ObjectId, ref: "Item"}],
+    items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
   },
   { timestamps: true }
 );

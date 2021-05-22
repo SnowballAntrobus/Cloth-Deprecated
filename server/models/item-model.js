@@ -9,6 +9,8 @@ const Item = new Schema(
     brand: [{ type: String, required: true }],
     season: { type: String, required: true },
     w2c: [{ type: String, required: true }],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+
     own: { type: Number, required: false },
     wish: { type: Number, required: false },
 

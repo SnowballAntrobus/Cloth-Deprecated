@@ -53,8 +53,10 @@ updateUser = async (req, res) => {
     user.username = body.username;
     user.points = body.points;
     user.admin = body.admin;
-    user.wishlist = body.wishlist;
-    user.closet = body.closet;
+    user.height = body.height;
+    user.weight = body.weight;
+    user.style = body.style;
+    user.location = body.location;
     user
       .save()
       .then(() => {

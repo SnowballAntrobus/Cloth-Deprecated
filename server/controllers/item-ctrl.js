@@ -112,10 +112,47 @@ getItems = async (req, res) => {
   }).catch((err) => console.log(err));
 };
 
+updateItemReviews = async (req, res) => {
+  const body = req.body;
+
+  if (!body) {
+    return res.status(400).json({
+      success: false,
+      error: "You must provide a body to update",
+    });
+  }
+
+  Item.findOne({ _id: req.params.id }, (err, item) => {
+    if (err) {
+      return res.status(404).json({
+        err,
+        message: "Item not found!",
+      });
+    }
+    item.reviews = body.reviews;
+    item
+      .save()
+      .then(() => {
+        return res.status(200).json({
+          success: true,
+          id: item._id,
+          message: "Item reviews updated!",
+        });
+      })
+      .catch((error) => {
+        return res.status(404).json({
+          error,
+          message: "Item reviews not updated",
+        });
+      });
+  });
+};
+
 module.exports = {
   createItem,
   updateItem,
   deleteItem,
   getItems,
   getItemById,
+  updateItemReviews,
 };
