@@ -18,6 +18,9 @@ const Review = new Schema(
     fire: { type: Number, required: true },
     description: { type: String, required: false },
     imagesLink: { type: String, required: false },
+
+    approved: { type: Boolean, required: false },
+    points: { type: Number, required: true },
   },
   { timestamps: true }
 );

@@ -21,10 +21,6 @@ const INITIAL_STATE = {
   email: "",
   password: "",
   error: null,
-
-  height: 0,
-  weight: 0,
-  location: "",
 };
 
 class SignUpFormBase extends Component {
@@ -35,7 +31,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, password, height, weight, location } = this.state;
+    const { username, email, password } = this.state;
 
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, password)
@@ -44,7 +40,7 @@ class SignUpFormBase extends Component {
         const payload = { _id };
         await wishlistApi.createWishlist(authUser.user, _id, payload);
         await closetApi.createCloset(authUser.user, _id, payload);
-        const payloadUser = { _id: _id, username: username, height: height, weight: weight, location: location };
+        const payloadUser = { _id: _id, username: username };
         userApi.createUser(authUser.user, _id, payloadUser);
 
         this.setState({ ...INITIAL_STATE });
@@ -62,7 +58,7 @@ class SignUpFormBase extends Component {
   };
 
   render() {
-    const { username, email, password, height, weight, location, error } = this.state;
+    const { username, email, password, error } = this.state;
 
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -116,50 +112,6 @@ class SignUpFormBase extends Component {
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
-                />
-              </div>
-              <div>
-                <label htmlFor="height" className="sr-only">
-                  Height
-                </label>
-                <input
-                  name="height"
-                  value={height}
-                  onChange={this.onChange}
-                  type="height"
-                  autoComplete="current-height"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="In centimeters"
-                />
-              </div>
-              <div>
-                <label htmlFor="weight" className="sr-only">
-                  Weight
-                </label>
-                <input
-                  name="weight"
-                  value={weight}
-                  onChange={this.onChange}
-                  type="weight"
-                  autoComplete="current-weight"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="In kilograms"
-                />
-              </div>
-              <div>
-                <label htmlFor="location" className="sr-only">
-                  Location
-                </label>
-                <input
-                  name="location"
-                  value={location}
-                  onChange={this.onChange}
-                  type="location"
-                  autoComplete="current-location"
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Country"
                 />
               </div>
             </div>
