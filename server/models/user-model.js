@@ -5,7 +5,7 @@ const User = new Schema(
   {
     _id: { type: String, required: true },
     username: { type: String, required: true },
-    admin: { type: Boolean, required: true },
+    admin: { type: Boolean, required: false },
 
     height: { type: Number, required: true },
     weight: { type: Number, required: true },

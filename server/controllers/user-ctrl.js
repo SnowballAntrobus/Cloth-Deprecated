@@ -16,6 +16,9 @@ createUser = (req, res) => {
     return res.status(400).json({ success: false, error: err });
   }
 
+  user.admin = false;
+  user.points = 0;
+
   user
     .save()
     .then(() => {
