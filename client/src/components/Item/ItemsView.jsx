@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { itemApi } from "../../api";
 
 class LinkItem extends Component {
   itemLink = (event) => {
@@ -17,7 +16,7 @@ class LinkItem extends Component {
   }
 }
 
-class ItemsGrid extends Component {
+class ItemsView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,11 +25,9 @@ class ItemsGrid extends Component {
   }
 
   componentDidMount = async () => {
-    await itemApi.getAllItems().then((items) => {
       this.setState({
-        items: items.data.data,
+        items: this.props.items,
       });
-    });
   };
 
   render() {
@@ -40,7 +37,7 @@ class ItemsGrid extends Component {
       <LinkItem id={item._id} key={item._id} src={item.imageURL} />
     ));
 
-    console.log("TCL: ItemsGrid -> render -> items", items);
+    console.log("TCL: ItemsView -> render -> items", items);
 
     return (
       <div>
@@ -50,4 +47,4 @@ class ItemsGrid extends Component {
   }
 }
 
-export default ItemsGrid;
+export default ItemsView;

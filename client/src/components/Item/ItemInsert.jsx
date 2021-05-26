@@ -11,11 +11,17 @@ import { itemApi } from "../../api";
 import { ListUpdate } from "./ListUpdate"
 
 export const ItemsInsert = (props) => {
+  const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [brand, setBrand] = useState([]);
   const [season, setSeason] = useState("");
   const [w2c, setW2c] = useState([]);
   const fileInput = useRef();
+
+  const handleChangeInputDescription = async (event) => {
+    const description = event.target.value;
+    setDescription(description.toLowerCase());
+  };
 
   const handleChangeInputType = async (event) => {
     const type = event.target.value;
@@ -48,7 +54,7 @@ export const ItemsInsert = (props) => {
       });
     };
 
-    if(!(type && brand && season)) {
+    if(!(description && type && brand && season)) {
       event.preventDefault();
       window.alert(`Missing fields`);
       return
@@ -75,8 +81,9 @@ export const ItemsInsert = (props) => {
     const _id = randomBytes(12).toString('hex');
     const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}.${filetype}`;
 
-    const payload = { _id, imageURL, type, brand, season, w2c };
+    const payload = { _id, description, imageURL, type, brand, season, w2c };
 
+    setDescription("");
     setType("");
     setBrand([]);
     setSeason("");
@@ -112,6 +119,24 @@ export const ItemsInsert = (props) => {
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <input type="file" ref={fileInput} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="col-span-3 sm:col-span-2">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Description
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input type="text"
+                          value={type}
+                          onChange={handleChangeInputDescription}
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          placeholder="Freya Hartas GG animal wool sweater"
+                        />
                       </div>
                     </div>
                   </div>

@@ -1,22 +1,20 @@
 import React, { Component } from "react";
-import { closetApi } from "../../api";
+import { itemApi } from "../../api";
 import { ItemsView } from "./ItemsView"
 
 
-class ClosetView extends Component {
+class ItemsAll extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.match.params.id,
       items: [],
     };
   };
 
   componentDidMount = async () => {
-    const { id } = this.state;
-    await closetApi.getClosetById(id).then((closet) => {
+    await itemApi.getAllItems().then((items) => {
       this.setState({
-        items: closet.data.data.items,
+        items: items.data.data,
       });
     });
   };
@@ -32,4 +30,4 @@ class ClosetView extends Component {
   };
 }
 
-export default ClosetView;
+export default ItemsAll;
