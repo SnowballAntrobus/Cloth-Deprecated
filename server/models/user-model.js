@@ -7,8 +7,8 @@ const User = new Schema(
     username: { type: String, required: true },
     admin: { type: Boolean, required: false },
 
-    height: { type: Number, required: true },
-    weight: { type: Number, required: true },
+    height: { type: Number, required: false },
+    weight: { type: Number, required: false },
 
     location: { type: String, required: false },
     style: [{ type: String, required: false }],
