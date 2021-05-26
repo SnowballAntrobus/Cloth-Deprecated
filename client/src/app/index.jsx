@@ -17,7 +17,7 @@ import {
   ItemPage,
 } from "../components/Item";
 import { WishlistView, WishlistUpdate } from "../components/Wishlist";
-import { ClosetView, ClosetUpdate } from "../components/Closet";
+import { ClosetView, ClosetItem, ClosetAdd } from "../components/Closet";
 
 import * as ROUTES from "../constants/routes";
 import { withAuthentication } from "../components/Session";
@@ -45,7 +45,8 @@ const App = () => (
       <Route path={ROUTES.WISHLIST_UPDATE} exact component={WishlistUpdate} />
 
       <Route path={ROUTES.CLOSET_PAGE} exact component={ClosetView} />
-      <Route path={ROUTES.CLOSET_UPDATE} exact component={ClosetUpdate} />
+      <Route path={ROUTES.CLOSET_ITEM} exact component={ClosetItem} />
+      <Route path={ROUTES.CLOSET_ADD} exact component={ClosetAdd} />
     </Switch>
   </Router>
 );
