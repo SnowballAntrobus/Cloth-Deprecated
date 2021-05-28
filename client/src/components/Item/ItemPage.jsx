@@ -12,11 +12,14 @@ class ItemPage extends Component {
 
     this.state = {
       id: this.props.match.params.id,
+
       description: "",
       imageURL: "",
       type: "",
       brand: [],
       season: "",
+
+      sellers: [],
       w2c: [],
     };
   }
@@ -31,13 +34,14 @@ class ItemPage extends Component {
       type: item.data.data.type,
       brand: item.data.data.brand,
       season: item.data.data.season,
+      sellers: item.data.data.sellers,
       w2c: item.data.data.w2c,
     });
   };
 
   render() {
-    const { id, description, imageURL, type, brand, season, w2c } = this.state;
-    const item = { _id: id, description: description, imageURL: imageURL, type: type, brand: brand, season: season, w2c: w2c };
+    const { id, description, imageURL, type, brand, season, sellers, w2c } = this.state;
+    const item = { _id: id, description: description, imageURL: imageURL, type: type, brand: brand, season: season, sellers: sellers, w2c: w2c };
 
     return (
       <div className="m-10 flex justify-center">
@@ -61,6 +65,9 @@ class ItemPage extends Component {
               </div>
               <div className="w-full text-sm font-medium text-gray-500 mt-2">
                 Season: {season}
+              </div>
+              <div className="w-full text-sm font-medium text-gray-500 mt-2">
+                Sellers: {sellers}
               </div>
               <div className="w-full text-sm font-medium text-gray-500 mt-2">
                 W2C: {w2c}

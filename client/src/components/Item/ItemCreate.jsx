@@ -10,12 +10,15 @@ import { itemApi } from "../../api";
 
 import { ListUpdate } from "./ListUpdate"
 
-export const ItemsInsert = (props) => {
+export const ItemCreate = (props) => {
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
   const [brand, setBrand] = useState([]);
   const [season, setSeason] = useState("");
+
+  const [sellers, setSellers] = useState([]);
   const [w2c, setW2c] = useState([]);
+
   const fileInput = useRef();
 
   const handleChangeInputDescription = async (event) => {
@@ -33,7 +36,7 @@ export const ItemsInsert = (props) => {
     setSeason(season.toLowerCase());
   };
 
-  const handleIncludeItem = async (event) => {
+  const handleCreateItem = async (event) => {
 
     event.preventDefault();
 
@@ -55,25 +58,21 @@ export const ItemsInsert = (props) => {
     };
 
     if(!(description && type && brand && season)) {
-      event.preventDefault();
       window.alert(`Missing fields`);
       return
     }
 
     if (fileInput.current.files[0] === undefined){
-      event.preventDefault();
       window.alert(`Missing image file`);
       return
     }
 
     const filetype = fileInput.current.files[0].type.split("/")[1];
     if (filetype !== "png" && filetype !== "jpeg") {
-      event.preventDefault();
       window.alert(`Image is not a png or jpg`);
       return
     }
     if (fileInput.current.files[0].size > 1000000) {
-      event.preventDefault();
       window.alert(`Image file is larger than 500kb`);
       return
     }
@@ -81,15 +80,16 @@ export const ItemsInsert = (props) => {
     const _id = randomBytes(12).toString('hex');
     const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}.${filetype}`;
 
-    const payload = { _id, description, imageURL, type, brand, season, w2c };
+    const payload = { _id, description, imageURL, type, brand, season, sellers, w2c };
 
     setDescription("");
     setType("");
     setBrand([]);
     setSeason("");
+    setSellers([]);
     setW2c([]);
 
-    itemApi.insertItem(props.sessionStore.authUser, payload).then((res) => {
+    itemApi.createItem(props.sessionStore.authUser, payload).then((res) => {
       uploadImage(_id);
       window.alert(`Item added!`);
     });
@@ -195,9 +195,10 @@ export const ItemsInsert = (props) => {
                   <div className="col-span-3 sm:col-span-2">
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
-                        W2C
+                        Sellers W2C
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
+                        <ListUpdate list={sellers} setList={setSellers}/>
                         <ListUpdate list={w2c} setList={setW2c}/>
                       </div>
                     </div>
@@ -207,7 +208,7 @@ export const ItemsInsert = (props) => {
               </div>
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                 <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={handleIncludeItem}>Add Item</button>
+                  onClick={handleCreateItem}>Add Item</button>
               </div>
             </div>
           </form>
@@ -221,4 +222,4 @@ const condition = (authUser) => !!authUser;
 
 export default compose(inject('sessionStore'),
   observer, withAuthorization(condition)
-)(ItemsInsert);
+)(ItemCreate);

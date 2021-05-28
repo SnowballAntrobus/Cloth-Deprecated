@@ -5,6 +5,10 @@ const User = new Schema(
   {
     _id: { type: String, required: true },
     username: { type: String, required: true },
+
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+
+    approved: { type: Boolean, required: false },
     admin: { type: Boolean, required: false },
 
     height: { type: Number, required: false },

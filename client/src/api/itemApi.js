@@ -6,7 +6,7 @@ const api = axios.create({
   baseURL,
 });
 
-export const insertItem = async (authUser, payload) => {
+export const createItem = async (authUser, payload) => {
   const token = await authUser.getIdToken();
   return api.post("/item", payload, {
     headers: { authorization: `Bearer ${token}` },
@@ -28,7 +28,7 @@ export const getAllItems = () => api.get(`/items`);
 export const getItemById = (id) => api.get(`/item/${id}`);
 
 const itemApi = {
-  insertItem,
+  createItem,
   getAllItems,
   updateItemById,
   deleteItemById,

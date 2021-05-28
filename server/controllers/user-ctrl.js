@@ -54,12 +54,12 @@ updateUser = async (req, res) => {
       });
     }
     user.username = body.username;
-    user.points = body.points;
-    user.admin = body.admin;
+    user.reviews = body.reviews;
     user.height = body.height;
     user.weight = body.weight;
-    user.style = body.style;
     user.location = body.location;
+    user.style = body.style;
+    user.points = body.points;
     user
       .save()
       .then(() => {

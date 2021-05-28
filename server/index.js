@@ -9,6 +9,7 @@ const wishlistRouter = require("./routes/wishlist-router");
 const closetRouter = require("./routes/closet-router");
 const userRouter = require("./routes/user-router");
 const reviewRouter = require("./routes/review-router");
+const sellerRouter = require("./routes/seller-router");
 
 const app = express();
 const apiPort = 5000;
@@ -28,5 +29,6 @@ app.use("/api", wishlistRouter);
 app.use("/api", closetRouter);
 app.use("/api", userRouter);
 app.use("/api", reviewRouter);
+app.use("/api", sellerRouter);
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));

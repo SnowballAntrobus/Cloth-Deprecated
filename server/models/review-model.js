@@ -5,17 +5,17 @@ const Review = new Schema(
   {
     uid: { type: String, required: true },
     item: { type: Schema.Types.ObjectId, ref: "Item", required: true },
-    w2c: { type: String, required: true },
+    seller: { type: Schema.Types.ObjectId, ref: "Seller", required: true},
 
     height: { type: Number, required: true },
     weight: { type: Number, required: true },
     size: { type: String, required: true },
-    fit: { type: String, required: true },
 
+    fit: { type: Number, required: true },
     quality: { type: Number, required: true },
-    similarity: { type: Number, required: true },
-    
+    similarity: { type: Number, required: false },
     fire: { type: Number, required: true },
+    
     description: { type: String, required: false },
     imagesLink: { type: String, required: false },
 
@@ -25,4 +25,4 @@ const Review = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Review", Review, "review");
+module.exports = mongoose.model("Review", Review, "reviews");
