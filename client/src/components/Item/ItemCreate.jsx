@@ -132,7 +132,7 @@ export const ItemCreate = (props) => {
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
                         <input type="text"
-                          value={type}
+                          value={description}
                           onChange={handleChangeInputDescription}
                           className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                           placeholder="Freya Hartas GG animal wool sweater"

@@ -1,3 +1,3 @@
-import ReviewAdd from "./ReviewAdd"
+import ReviewCreate from "./ReviewCreate"
 
-export { ReviewAdd };
+export { ReviewCreate };

@@ -51,7 +51,7 @@ updateReview = async (req, res) => {
       });
     }
     review.quality = body.quality;
-    review.similarity = body.similarity;
+    review.accuracy = body.accuracy;
     review.fire = body.fire;
     review.description = body.description;
     review.imagesLink = body.imagesLink;

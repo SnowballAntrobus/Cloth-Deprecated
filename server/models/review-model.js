@@ -13,7 +13,7 @@ const Review = new Schema(
 
     fit: { type: Number, required: true },
     quality: { type: Number, required: true },
-    similarity: { type: Number, required: false },
+    accuracy: { type: Number, required: false },
     fire: { type: Number, required: true },
     
     description: { type: String, required: false },

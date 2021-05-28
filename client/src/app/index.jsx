@@ -46,7 +46,7 @@ const App = () => (
       <Route path={ROUTES.CLOSET_PAGE} exact component={ClosetView} />
       <Route path={ROUTES.CLOSET_ITEM} exact component={ClosetItem} />
 
-      <Route path={ROUTES.REVIEW_ADD} exact component={ReviewCreate} />
+      <Route path={ROUTES.REVIEW_CREATE} exact component={ReviewCreate} />
     </Switch>
   </Router>
 );

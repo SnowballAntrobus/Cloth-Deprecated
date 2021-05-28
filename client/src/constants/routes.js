@@ -19,4 +19,4 @@ export const WISHLIST_UPDATE = "/myWishlist/:id";
 export const CLOSET_PAGE = "/closets/:id";
 export const CLOSET_ITEM = "/closet/item/:id";
 
-export const REVIEW_ADD = "/review/:id";
+export const REVIEW_CREATE = "/review/create";
