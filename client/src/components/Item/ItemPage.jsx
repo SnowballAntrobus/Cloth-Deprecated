@@ -4,7 +4,8 @@ import { compose } from "recompose";
 
 import { itemApi } from "../../api";
 
-import { AddItemToWishlist } from "../Wishlist/AddItemToWishlist"
+import { AddItemToWishlist } from "../Wishlist";
+import { AddItemToCloset } from "../Closet"; 
 
 class ItemPage extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class ItemPage extends Component {
 
       sellers: [],
       w2c: [],
+      reviews: [],
     };
   }
 
@@ -36,12 +38,13 @@ class ItemPage extends Component {
       season: item.data.data.season,
       sellers: item.data.data.sellers,
       w2c: item.data.data.w2c,
+      reviews: item.data.data.reviews,
     });
   };
 
   render() {
-    const { id, description, imageURL, type, brand, season, sellers, w2c } = this.state;
-    const item = { _id: id, description: description, imageURL: imageURL, type: type, brand: brand, season: season, sellers: sellers, w2c: w2c };
+    const { id, description, imageURL, type, brand, season, sellers, w2c, reviews } = this.state;
+    const item = { _id: id, description: description, imageURL: imageURL, type: type, brand: brand, season: season, sellers: sellers, w2c: w2c, reviews: reviews };
 
     return (
       <div className="m-10 flex justify-center">
@@ -55,7 +58,7 @@ class ItemPage extends Component {
                 {description}
               </h1>
               <div className="text-xl font-semibold text-gray-500">
-                <AddItemToWishlist item={item} authUser={this.props.sessionStore.authUser} />
+                <AddItemToWishlist item={item} />
               </div>
               <div className="w-full text-sm font-medium text-gray-500 mt-2">
                 Brand: {brand}

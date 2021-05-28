@@ -7,11 +7,11 @@ import { wishlistApi } from "../../api";
 class AddItemToWishlist extends Component {
   addToWishlist = async (event) => {
     event.preventDefault();
-    if (this.props.authUser === null) {
+    if (this.props.sessionStore.authUser === null) {
       window.alert("Sign in to use this feature!")
       return
     }
-    const id = this.props.authUser.uid;
+    const id = this.props.sessionStore.authUser.uid;
     await wishlistApi.getWishlistById(id).then((wishlist) => {
       if (
         wishlist.data.data.items.filter(
