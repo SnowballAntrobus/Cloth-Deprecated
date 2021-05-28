@@ -56,6 +56,7 @@ updateItem = async (req, res) => {
     item.season = body.season;
     item.sellers = body.sellers;
     item.w2c = body.w2c;
+    item.reviews = body.reviews;
     item
       .save()
       .then(() => {

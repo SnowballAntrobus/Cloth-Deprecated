@@ -4,7 +4,7 @@ import { compose } from "recompose";
 
 import { withAuthorization } from "../Session";
 
-import { reviewApi } from "../../api";
+import { reviewApi, userApi, sellerApi, itemApi, closetApi } from "../../api";
 
 export const ReviewCreate = (props) => {
   const [uid, setUid] = useState("");
@@ -25,8 +25,8 @@ export const ReviewCreate = (props) => {
 
   useEffect(() => {
     setUid(props.sessionStore.authUser.uid);
-    setItem(props.item._id);
-    setSeller(props.seller._id);
+    setItem(props.match.params.item);
+    setSeller(props.match.params.seller);
   }, []);
 
   const handleChangeInputHeight = async (event) => {
@@ -85,19 +85,31 @@ export const ReviewCreate = (props) => {
 
     const payload = { uid, item, seller, height, weight, size, fit, quality, accuracy, fire, description, imagesLink };
 
-    reviewApi.createReview(props.sessionStore.authUser, uid, payload).then((res) => {
-      window.alert(`Review added!`);
-    });
+    const itemPayload = await itemApi.getItemById(item).data.data;
+    const userPayload = await userApi.getUserById(uid).data.data;
+    const sellerPayload = await sellerApi.getSellerById(seller).data.data;
+    const closetPayload = await closetApi.getClosetById(uid).data.data;
+
+    const review = await reviewApi.createReview(props.sessionStore.authUser, uid, payload);
+    
+    closetPayload.reviews.push(review);
+    closetPayload.items.push(item);
+
+    itemPayload.reviews.push(review);
+    userPayload.reviews.push(review);
+    sellerPayload.reviews.push(review);
+
+    await closetPayload.updateClosetById(props.sessionStore.authUser, uid, closetPayload);
+    await itemApi.updateItemById(props.sessionStore.authUser, item, itemPayload);
+    await userApi.updateUserById(props.sessionStore.authUser, uid, userPayload);
+    await sellerApi.updateSellerById(props.sessionStore.authUser, seller, sellerPayload);
+
+    window.alert(`Item added to closet!`)
   };
 
   return (
     <div class="flex">
       <form class="flex-auto p-6">
-        <div class="flex flex-wrap">
-          <h1 class="flex-auto text-xl font-semibold">
-            {props.item.description}
-          </h1>
-        </div>
         <div class="flex items-baseline mt-4 mb-6">
           <div class="space-x-2 flex">
             <label className="block text-sm font-medium text-gray-700">
@@ -274,7 +286,7 @@ export const ReviewCreate = (props) => {
           </div>
         </div>
         <div class="flex space-x-3 mb-4 text-sm font-medium">
-            <button class="w-1/2 flex items-center justify-center rounded-md bg-black text-white" onClick={handleCreateReview}>Review Item</button>
+            <button class="w-1/2 flex items-center justify-center rounded-md bg-black text-white" onClick={handleCreateReview}>Add to Closet</button>
         </div>   
       </form>
     </div>

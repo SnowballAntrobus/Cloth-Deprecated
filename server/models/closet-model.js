@@ -5,6 +5,7 @@ const Closet = new Schema(
   {
     _id: { type: String, required: true },
     items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   },
   { timestamps: true }
 );

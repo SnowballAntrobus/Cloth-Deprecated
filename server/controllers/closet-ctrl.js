@@ -68,6 +68,7 @@ updateCloset = async (req, res) => {
       });
     }
     closet.items = body.items;
+    closet.reviews = body.reviews;
     closet
       .save()
       .then(() => {
