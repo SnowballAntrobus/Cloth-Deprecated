@@ -5,6 +5,8 @@ const Seller = new Schema(
   {
     name: { type: String, required: true },
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+
+    approved: { type: Boolean, required: false},
   },
   { timestamps: true }
 );

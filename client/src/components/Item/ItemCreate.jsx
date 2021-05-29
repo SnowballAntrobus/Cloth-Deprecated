@@ -6,7 +6,7 @@ import randomBytes from "randombytes";
 
 import { withAuthorization } from "../Session";
 
-import { itemApi } from "../../api";
+import { itemApi, sellerApi } from "../../api";
 
 import { ListUpdate } from "./ListUpdate"
 
@@ -16,7 +16,7 @@ export const ItemCreate = (props) => {
   const [brand, setBrand] = useState([]);
   const [season, setSeason] = useState("");
 
-  const [sellers, setSellers] = useState([]);
+  const [sellerNames, setSellerNames] = useState([]);
   const [w2c, setW2c] = useState([]);
 
   const fileInput = useRef();
@@ -80,6 +80,25 @@ export const ItemCreate = (props) => {
     const _id = randomBytes(12).toString('hex');
     const imageURL = `https://cloth-dev.s3.us-east-2.amazonaws.com/images/${_id}.${filetype}`;
 
+    const sellers = [];
+
+    //terribly inefficeint temp code comes next!!!
+    const currSellers = sellerApi.getAllSellers();
+    for (const nameIndex in sellerNames) {
+      const name = sellerNames[nameIndex];
+      const seller = null;
+      for (const c in currSellers) {
+        if (name == currSellers[c].name) {
+          seller = currSellers[c]._id;
+        }
+      }
+      if(!seller) {
+        const payload = { name };
+        seller =  await sellerApi.createSeller(props.sessionStore.authUser, payload);
+      }
+      sellers.push(seller);
+    }
+
     const payload = { _id, description, imageURL, type, brand, season, sellers, w2c };
 
     setDescription("");
@@ -118,7 +137,7 @@ export const ItemCreate = (props) => {
                         Image
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
-                        <input type="file" ref={fileInput} />
+                        <input type="file" ref={fileInput}/>
                       </div>
                     </div>
                   </div>
@@ -198,7 +217,7 @@ export const ItemCreate = (props) => {
                         Sellers W2C
                       </label>
                       <div className="mt-1 flex rounded-md shadow-sm">
-                        <ListUpdate list={sellers} setList={setSellers}/>
+                        <ListUpdate list={sellerNames} setList={setSellerNames}/>
                         <ListUpdate list={w2c} setList={setW2c}/>
                       </div>
                     </div>
